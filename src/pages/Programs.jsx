@@ -23,7 +23,7 @@ import {
   Crown
 } from 'lucide-react';
 
-const Programs = () => {
+const Programs = () => {   
   const [expandedProgram, setExpandedProgram] = useState(null);
 
   const programs = [
