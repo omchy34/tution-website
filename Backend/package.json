@@ -6,7 +6,8 @@
  
   "scripts": {
     "start": "node -r dotenv/config --experimental-json-modules src/index.js",
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
+    "prebuild": "npm ci --cache /tmp/empty-cache"
   },
   "keywords": [],
   "author": "",
