@@ -40,13 +40,13 @@ const Preloader = ({ onLoadComplete }) => {
       <div className="relative z-10 text-center">
         {/* Logo container */}
         <div className="mb-8 flex justify-center">
-          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl">
+          <div className="w-24 h-24 rounded-full flex items-center justify-center shadow-2xl">
             
       
             <img 
               src={Logo} 
               alt="Logo" 
-              className="w-18 h-18 object-contain"
+              className="w-20 h-20 object-contain rounded-full"
             />
             
             {/* OPTION 2: Use a different icon (Education theme) */}

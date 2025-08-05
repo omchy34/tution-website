@@ -1,4 +1,4 @@
-// Enhanced Navbar Component
+// Enhanced Navbar Component - Fixed Mobile Background
 import Logo from "../assets/Logo.jpg"
 import { useState, useEffect } from "react";
 import { GraduationCap, Menu, X, ChevronDown } from "lucide-react";
@@ -19,12 +19,6 @@ const Navbar = ({ navigate }) => {
     { 
       name: 'Programs', 
       path: '/programs',
-      dropdown: [
-        { name: 'JEE Preparation', path: '/programs#jee' },
-        { name: 'NEET Coaching', path: '/programs#neet' },
-        { name: 'Foundation Classes', path: '/programs#foundation' },
-        { name: 'Board Preparation', path: '/programs#board' }
-      ]
     },
     { name: 'About', path: '/about' },
     { name: 'Campus', path: '/campus' },
@@ -41,7 +35,7 @@ const Navbar = ({ navigate }) => {
   return (
     <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${
       scrolled 
-        ? 'bg-white/95 backdrop-blur-xl shadow-2xl border-b border-white/20' 
+        ? 'bg-white shadow-2xl border-b border-gray-200' 
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -55,7 +49,7 @@ const Navbar = ({ navigate }) => {
           <span className={`font-bold text-2xl transition-all duration-300 ${
             scrolled ? 'text-gray-800' : 'text-white'
           }`}>
-            Deeksha Classes
+            DEEKSHA CLASSES
           </span>
         </button>
 
@@ -112,11 +106,16 @@ const Navbar = ({ navigate }) => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-white/95 backdrop-blur-xl z-40 transform transition-transform duration-500 ease-in-out ${
+      {/* Mobile Menu - FIXED BACKGROUND */}
+      <div className={`fixed top-0 right-0 h-full w-80 z-40 transform transition-transform duration-500 ease-in-out ${
         isOpen ? "translate-x-0" : "translate-x-full"
-      } shadow-2xl border-l border-white/20`}>
-        <div className="flex flex-col px-6 py-8 space-y-6">
+      } shadow-2xl`}>
+        {/* Solid background layer */}
+        <div className="absolute inset-0 bg-white"></div>
+        {/* Gradient overlay for visual appeal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-blue-50/30"></div>
+        {/* Content layer */}
+        <div className="relative z-10 flex flex-col px-6 py-8 space-y-6 h-full">
           <button 
             onClick={() => setIsOpen(false)} 
             className="self-end text-2xl text-gray-600 hover:text-gray-800 transition-colors hover:scale-110"

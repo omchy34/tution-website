@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import main from "../assets/main.jpg";
 import { 
   Users, 
   TrendingUp, 
@@ -99,10 +100,7 @@ const HeroSection = ({ navigate }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
               
-              <button className="group border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-2 backdrop-blur-sm">
-                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>Watch Demo</span>
-              </button>
+              
             </div>
 
             <div className="flex flex-wrap gap-6 pt-8">
@@ -128,9 +126,9 @@ const HeroSection = ({ navigate }) => {
               {/* Main Image Container */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 {/* Placeholder for your tuition image */}
-                <div className="aspect-[4/3] bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                <div className="aspect-[3/2] bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                   <div className="text-center text-gray-600">
-                    <img src="" alt="" />
+                    <img src={main} alt="" height="1500" width="1500" />
                   </div>
                 </div>
                 
@@ -156,7 +154,7 @@ const HeroSection = ({ navigate }) => {
                   onClick={() => navigate && navigate('/gallery')}
                   className="text-blue-300 hover:text-white transition-colors font-medium flex items-center justify-center space-x-2 mx-auto group"
                 >
-                  <span>View More Photos</span>
+                  <span className='text-tiny'>View More Photos</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>

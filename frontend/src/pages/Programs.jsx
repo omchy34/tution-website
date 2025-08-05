@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logo from "../assets/Logo.jpg"
 import { 
   BookOpen, 
@@ -23,9 +23,8 @@ import {
   Crown
 } from 'lucide-react';
 
-const Programs = () => {   
-  const [expandedProgram, setExpandedProgram] = useState(null);
-
+const Programs = ({ navigate }) => {
+  
   const programs = [
     {
       id: 1,
@@ -43,14 +42,7 @@ const Programs = () => {
         "Previous year question analysis",
         "Regular assessments and feedback"
       ],
-      detailedDescription: "Our JEE preparation program is designed to help students crack one of India's most competitive engineering entrance exams. With a structured curriculum covering Physics, Chemistry, and Mathematics, we provide comprehensive study material, regular mock tests, and personalized attention to ensure maximum success rate.",
-      highlights: [
-        "Expert faculty with 10+ years experience",
-        "Small batch sizes for personalized attention",
-        "Advanced study materials and digital resources",
-        "Regular parent-teacher meetings",
-        "Scholarship opportunities for top performers"
-      ],
+      route: "/jee-preparation",
       gradient: "from-emerald-500 to-teal-600",
       bgGradient: "from-emerald-900/20 to-teal-900/20",
       borderColor: "border-emerald-500/20 hover:border-emerald-400/50",
@@ -72,14 +64,7 @@ const Programs = () => {
         "Conceptual clarity sessions",
         "NCERT based curriculum"
       ],
-      detailedDescription: "Our NEET coaching program is specifically designed for aspiring medical students. With emphasis on Biology, Chemistry, and Physics, we provide in-depth conceptual understanding, regular practice sessions, and extensive mock test series to ensure students are well-prepared for this prestigious medical entrance exam.",
-      highlights: [
-        "Experienced medical professionals as mentors",
-        "Comprehensive Biology lab facilities",
-        "Regular revision and doubt clearing",
-        "Current affairs and GK sessions",
-        "Counseling for college selection"
-      ],
+      route: "/neet-preparation",
       gradient: "from-rose-500 to-pink-600",
       bgGradient: "from-rose-900/20 to-pink-900/20",
       borderColor: "border-rose-500/20 hover:border-rose-400/50",
@@ -101,14 +86,7 @@ const Programs = () => {
         "Regular assessments",
         "Career guidance sessions"
       ],
-      detailedDescription: "Our Foundation Classes program is designed to build a strong base for students in their formative years. We focus on conceptual clarity, problem-solving skills, and analytical thinking that will serve as a solid foundation for future competitive exam preparation.",
-      highlights: [
-        "Age-appropriate teaching methodology",
-        "Interactive and engaging sessions",
-        "Regular skill development workshops",
-        "Olympiad preparation included",
-        "Personality development programs"
-      ],
+      route: "/foundation-class",
       gradient: "from-amber-500 to-orange-600",
       bgGradient: "from-amber-900/20 to-orange-900/20",
       borderColor: "border-amber-500/20 hover:border-amber-400/50",
@@ -130,14 +108,7 @@ const Programs = () => {
         "Revision and practice sessions",
         "Exam strategy guidance"
       ],
-      detailedDescription: "Our Board Preparation program ensures students excel in their Class 10th and 12th board examinations. We provide comprehensive coverage of all subjects with special focus on board exam patterns, marking schemes, and effective answering techniques.",
-      highlights: [
-        "Subject-wise expert teachers",
-        "Regular chapter-wise tests",
-        "Comprehensive study materials",
-        "Time management strategies",
-        "Stress management workshops"
-      ],
+      route: "/board-preparation",
       gradient: "from-violet-500 to-purple-600",
       bgGradient: "from-violet-900/20 to-purple-900/20",
       borderColor: "border-violet-500/20 hover:border-violet-400/50",
@@ -145,8 +116,15 @@ const Programs = () => {
     }
   ];
 
-  const toggleExpanded = (programId) => {
-    setExpandedProgram(expandedProgram === programId ? null : programId);
+  const handleDiscoverMore = (route) => {
+    console.log('Navigating to:', route); // Debug log
+    try {
+      navigate(route);
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Fallback to window.location if navigate fails
+      window.location.href = route;
+    }
   };
 
   return (
@@ -227,7 +205,7 @@ const Programs = () => {
                 <div className={`absolute inset-0 bg-gradient-to-br ${program.bgGradient} opacity-50`}></div>
                 
                 {/* Program Header */}
-<div className="relative p-4">
+                <div className="relative p-4">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center space-x-3">
                       <div className={`relative bg-gradient-to-r ${program.gradient} p-2 rounded-lg shadow-lg`}>
@@ -323,74 +301,16 @@ const Programs = () => {
                     </div>
                   </div>
 
-                  {/* See More Button */}
+                  {/* Discover More Button */}
                   <button
-                    onClick={() => toggleExpanded(program.id)}
+                    onClick={() => handleDiscoverMore(program.route)}
                     className={`w-full relative overflow-hidden bg-gradient-to-r ${program.gradient} hover:shadow-lg text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2 group`}
                   >
                     <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10 text-sm">
-                      {expandedProgram === program.id ? 'Show Less' : 'Discover More'}
-                    </span>
-                    <ChevronRight className={`relative z-10 w-4 h-4 transition-transform duration-300 ${expandedProgram === program.id ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+                    <span className="relative z-10 text-sm">Discover More</span>
+                    <ChevronRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
-
-                {/* Expanded Content */}
-                {expandedProgram === program.id && (
-                  <div className="relative border-t border-slate-700/50">
-                    <div className={`absolute inset-0 bg-gradient-to-r ${program.bgGradient} opacity-30`}></div>
-                    <div className="relative p-8 space-y-8">
-                      {/* Detailed Description */}
-                      <div className="bg-slate-900/60 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50">
-                        <h4 className="text-white font-bold mb-4 flex items-center text-lg">
-                          <div className={`p-2 rounded-lg bg-gradient-to-r ${program.gradient} mr-3`}>
-                            <BookOpen className="w-4 h-4 text-white" />
-                          </div>
-                          Program Overview
-                        </h4>
-                        <p className="text-slate-300 text-base leading-relaxed">
-                          {program.detailedDescription}
-                        </p>
-                      </div>
-
-                      {/* Highlights */}
-                      <div className="bg-slate-900/60 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50">
-                        <h4 className="text-white font-bold mb-4 flex items-center text-lg">
-                          <div className={`p-2 rounded-lg bg-gradient-to-r ${program.gradient} mr-3`}>
-                            <Award className="w-4 h-4 text-white" />
-                          </div>
-                          Program Highlights
-                        </h4>
-                        <div className="grid gap-3">
-                          {program.highlights.map((highlight, index) => (
-                            <div key={index} className="flex items-start space-x-3 group">
-                              <div className="flex-shrink-0 mt-1">
-                                <Zap className="w-4 h-4 text-yellow-400" />
-                              </div>
-                              <span className="text-slate-300 text-base group-hover:text-white transition-colors duration-200">
-                                {highlight}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* CTA Section */}
-                      <div className={`relative overflow-hidden bg-gradient-to-r ${program.gradient} rounded-xl p-6`}>
-                        <div className="absolute inset-0 bg-white/10"></div>
-                        <div className="relative text-center">
-                          <p className="text-white/90 mb-4 text-lg font-medium">
-                            Ready to start your journey with us?
-                          </p>
-                          <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 border border-white/30 hover:border-white/50">
-                            Enroll Now
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           ))}
